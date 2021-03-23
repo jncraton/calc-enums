@@ -29,7 +29,7 @@ def tokenize(text):
                 yield name, m.group(1)
                 break
         else:
-            raise Exception(f"Invalid token here>{text[:10]}")
+            raise Exception(f"Invalid token here:{text[:10]}")
 
 
 def evaluate(tokens):
