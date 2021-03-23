@@ -25,11 +25,12 @@ def tokenize(text):
             m = re.match(regexp, text)
 
             if m:
-                text = text[len(m.group(0)):]
+                text = text[len(m.group(0)) :]
                 yield name, m.group(1)
                 break
         else:
             raise Exception(f"Invalid token here>{text[:10]}")
+
 
 def evaluate(tokens):
     """
@@ -37,10 +38,10 @@ def evaluate(tokens):
 
     >>> evaluate(tokenize(""))
     0.0
-    
+
     >>> evaluate(tokenize("1.0"))
     1.0
-    
+
     >>> evaluate(tokenize("1+2+3+4+5"))
     15.0
 
@@ -55,10 +56,10 @@ def evaluate(tokens):
     """
 
     operations = {
-        '+': operator.add,
-        '-': operator.sub,
-        '*': operator.mul,
-        '/': operator.truediv,
+        "+": operator.add,
+        "-": operator.sub,
+        "*": operator.mul,
+        "/": operator.truediv,
     }
 
     result = 0.0
@@ -67,6 +68,7 @@ def evaluate(tokens):
     for name, value in tokens:
         if name == "OPEN":
             value = evaluate(tokens)
+
         if name in ("LITERAL", "OPEN"):
             result = operations[op](result, float(value))
         elif name == "OPERATION":
