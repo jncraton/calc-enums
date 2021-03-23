@@ -1,7 +1,8 @@
 import re
 
+
 def tokenize(text):
-    """ 
+    """
     Tokenize an expression
 
     >>> len(list(tokenize("1+2")))
@@ -10,18 +11,18 @@ def tokenize(text):
     >>> next(tokenize("1-2"))[1]
     '1'
     """
-    
+
     pos = 0
 
-    token_types = [
-        ("LITERAL", '([\d\.]+)'),
-        ("OPERATOR", '([\+\-\*/])'),
-        ("OPEN", '(\()'),
-        ("CLOSE", '(\))'),
-    ]
+    token_types = {
+        "LITERAL": "([\d\.]+)",
+        "OPERATOR": "([\+\-\*/])",
+        "OPEN": "(\()",
+        "CLOSE": "(\))",
+    }
 
     while pos < len(text):
-        for name, regexp in token_types:
+        for name, regexp in token_types.items():
             m = re.match(regexp, text[pos:])
 
             if m:
@@ -30,6 +31,7 @@ def tokenize(text):
                 break
         else:
             raise Exception(f"Invalid token as position {pos}")
+
 
 def evaluate(tokens):
     """
@@ -49,22 +51,21 @@ def evaluate(tokens):
     """
 
     result = 0
-    op = '+'
+    op = "+"
 
     for name, value in tokens:
         # Handle parens recursively
         if name == "OPEN":
-            name = "LITERAL"
             value = evaluate(tokens)
-        
-        if name == "LITERAL":
-            if op == '+':
+
+        if name in ("LITERAL", "OPEN"):
+            if op == "+":
                 result += float(value)
-            elif op == '-':
+            elif op == "-":
                 result -= float(value)
-            elif op == '*':
+            elif op == "*":
                 result *= float(value)
-            elif op == '/':
+            elif op == "/":
                 result /= float(value)
         elif name == "OPERATION":
             op = value
@@ -73,5 +74,6 @@ def evaluate(tokens):
 
     return result
 
-if __name__ == '__main__':
-    print(evaluate(tokenize(input('Enter expression:'))))
+
+if __name__ == "__main__":
+    print(evaluate(tokenize(input("Enter expression:"))))
