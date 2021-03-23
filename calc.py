@@ -31,10 +31,9 @@ def tokenize(text):
         else:
             raise Exception(f"Invalid token here>{text[:10]}")
 
-
 def evaluate(tokens):
     """
-    Evaluates an iterator of tokens
+    Evaluates a generator of tokens
 
     >>> evaluate(tokenize(""))
     0.0
