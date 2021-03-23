@@ -1,3 +1,4 @@
+import operator
 import re
 
 
@@ -54,23 +55,21 @@ def evaluate(tokens):
     24.0
     """
 
+    operations = {
+        '+': operator.add,
+        '-': operator.sub,
+        '*': operator.mul,
+        '/': operator.truediv,
+    }
+
     result = 0.0
     op = "+"
 
     for name, value in tokens:
-        # Handle parens recursively
         if name == "OPEN":
             value = evaluate(tokens)
-
         if name in ("LITERAL", "OPEN"):
-            if op == "+":
-                result += float(value)
-            elif op == "-":
-                result -= float(value)
-            elif op == "*":
-                result *= float(value)
-            elif op == "/":
-                result /= float(value)
+            result = operations[op](result, float(value))
         elif name == "OPERATION":
             op = value
         elif name == "CLOSE":
