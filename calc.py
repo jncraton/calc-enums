@@ -35,6 +35,12 @@ def evaluate(tokens):
     """
     Evaluates an iterator of tokens
 
+    >>> evaluate(tokenize(""))
+    0.0
+    
+    >>> evaluate(tokenize("1.0"))
+    1.0
+    
     >>> evaluate(tokenize("1+2+3+4+5"))
     15.0
 
@@ -48,7 +54,7 @@ def evaluate(tokens):
     24.0
     """
 
-    result = 0
+    result = 0.0
     op = "+"
 
     for name, value in tokens:
