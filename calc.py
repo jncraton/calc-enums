@@ -12,21 +12,19 @@ def tokenize(text):
     '1'
     """
 
-    pos = 0
-
-    token_types = {
+    tokens = {
         "LITERAL": "([\d\.]+)",
         "OPERATOR": "([\+\-\*/])",
         "OPEN": "(\()",
         "CLOSE": "(\))",
     }
 
-    while pos < len(text):
-        for name, regexp in token_types.items():
-            m = re.match(regexp, text[pos:])
+    while text:
+        for name, regexp in tokens.items():
+            m = re.match(regexp, text)
 
             if m:
-                pos += len(m.group(0))
+                text = text[len(m.group(0)):]
                 yield name, m.group(1)
                 break
         else:
