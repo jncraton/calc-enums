@@ -2,6 +2,13 @@
 
 This project implements a simple calculator in Python. It includes a simple lexer and expression evaluator.
 
+## Learning Outcomes
+
+After completing this lab, learners will be able to:
+
+1. Diagnose bugs in existing software
+2. Use Python `Enum` to reduce surface area for bugs
+
 ## Usage
 
 ```
