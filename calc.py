@@ -14,10 +14,10 @@ def tokenize(text):
     """
 
     tokens = {
-        "LITERAL": "([\d\.]+)",
-        "OPERATOR": "([\+\-\*/])",
-        "OPEN": "(\()",
-        "CLOSE": "(\))",
+        "LITERAL": r"([\d\.]+)",
+        "OPERATOR": r"([\+\-\*/])",
+        "OPEN": r"(\()",
+        "CLOSE": r"(\))",
     }
 
     while text:
